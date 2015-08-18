@@ -6,3 +6,17 @@
     {{product.name}}
   </div>
 </div>
+<table class="table table-bordered">
+  <tr class="well">
+    <td colspan="4" class="text-right"><a href="#/store"> total items: {{cart.getTotalCount()}} prtice: {{cart.getTotalAmount() | currency}}</a></td>
+  </tr>
+  <tr ng-repeat="product in products">
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.price}}</td>
+    <td>Add to cart</td>
+  </tr>
+  <tr class="well">
+    <td colspan="4" class="text-right"><a href="#/store"> total items: {{cart.getTotalCount()}} prtice: {{cart.getTotalAmount() | currency}}</a></td>
+  </tr>
+</table>

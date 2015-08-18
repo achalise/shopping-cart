@@ -2,5 +2,7 @@
 
 storeApp.factory("DataService", function() {
    var myStore = new store();
-   return {store: myStore};
+   var cart = new ShoppingCart("myCart");
+   return {store: myStore,
+           cart: cart};
 });
