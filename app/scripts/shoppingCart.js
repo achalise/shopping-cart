@@ -12,11 +12,15 @@ ShoppingCart.prototype.addItem = function(sku, name, price, quantity) {
 }
 
 ShoppingCart.prototype.getTotalCount = function() {
-   return 10;
+   return this.items.length;
 }
 
 ShoppingCart.prototype.getTotalAmount = function() {
-   return 100;
+   var amount = 0;
+   for(var i = 0; i < this.items.length; i++) {
+      amount += this.items[i].price;
+   }
+   return amount;
 }
 
 
