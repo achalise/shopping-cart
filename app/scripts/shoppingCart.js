@@ -6,9 +6,21 @@ function ShoppingCart(name) {
    this.total = 0;
 }
 
-ShoppingCart.prototype.addItem = function(sku, name, price, quantity) {
-   var item = new cartItem(sku, name, price, quantity);
-   this.items.push(item);
+ShoppingCart.prototype.addItem = function(sku, name, price) {
+   var item = new cartItem(sku, name, price, 1);
+   var found = false;
+   this.items.some(function(it){
+     if(it.sku === sku) {
+       it.quantity += 1;
+       console.log('Incremented quantity to ' + item.quantity + ' for item: ' + item.sku);
+       found = true;
+       return;
+     }
+   });
+   if (!found) {
+     this.items.push(item);
+   }
+
 }
 
 ShoppingCart.prototype.getTotalCount = function() {
