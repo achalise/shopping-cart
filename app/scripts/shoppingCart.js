@@ -6,12 +6,14 @@ function ShoppingCart(name) {
    this.total = 0;
 }
 
-ShoppingCart.prototype.addItem = function(sku, name, price) {
-   var item = new cartItem(sku, name, price, 1);
+ShoppingCart.prototype.addItem = function(sku, name, price, qty) {
+   qty = qty * 1;
+   qty = isNaN(qty) ? 1 : qty;
+   var item = new cartItem(sku, name, price, qty);
    var found = false;
    this.items.some(function(it){
      if(it.sku === sku) {
-       it.quantity += 1;
+       it.quantity += qty;
        console.log('Incremented quantity to ' + item.quantity + ' for item: ' + item.sku);
        found = true;
        return;
@@ -30,7 +32,7 @@ ShoppingCart.prototype.getTotalCount = function() {
 ShoppingCart.prototype.getTotalAmount = function() {
    var amount = 0;
    for(var i = 0; i < this.items.length; i++) {
-      amount += this.items[i].price;
+      amount += this.items[i].price * this.items[i].quantity;
    }
    return amount;
 }

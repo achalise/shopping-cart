@@ -1,4 +1,75 @@
 <p class="text-info"> Thank you for shopping</p>
-<div ng-repeat="item in cart.items">
-  {{item.name}}
-</div>
+
+<row>
+  <div class="col-xs-8">
+    <table class="table table-bordered">
+      <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Back to Store</th>
+      </tr>
+      <tr ng-hide="cart.getTotalCount() > 0">
+        <td colspan="4">
+          you have no items.
+        </td>
+      </tr>
+      <tr ng-repeat="item in cart.items">
+        <td>{{item.name}}</td>
+        <td>
+          <div class="input-append">
+            {{item.quantity}}
+            <button
+              class="btn btn-success" type="button"
+              ng-disabled="item.quantity >= 1000"
+              ng-click="cart.addItem(item.sku, item.name, item.price, +1)">+</button>
+            <button
+              class="btn btn-inverse" type="button"
+              ng-disabled="item.quantity <= 1"
+              ng-click="cart.addItem(item.sku, item.name, item.price, -1)">-</button>
+          </div>
+        </td>
+        <td>{{item.price*item.quantity | currency}}</td>
+        <td>
+          <a href="" ng-click="cart.addItem(item.sku, item.name, item.price, -10000000)" >
+            <i class="icon-remove" />X
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xs-4">
+    <p class="text-info">
+
+      <button
+        class="btn btn-block"
+        onclick="window.location.href='default.htm'">
+        <i class="icon-chevron-left" /> back to store
+      </button>
+      <button
+        class="btn btn-block btn-danger"
+        ng-click="cart.clearItems()"
+        ng-disabled="cart.getTotalCount() < 1" >
+        <i class="icon-trash icon-white" /> clear cart
+      </button>
+
+    </p>
+
+    <p class="text-info">
+      <button
+        class="btn btn-block btn-primary"
+        ng-click="cart.checkout('PayPal')"
+        ng-disabled="cart.getTotalCount() < 1">
+        <i class="icon-ok icon-white" /> check out using PayPal
+      </button>
+      <button
+        class="btn btn-block btn-primary"
+        ng-click="cart.checkout('Google')"
+        ng-disabled="cart.getTotalCount() < 1">
+        <i class="icon-ok icon-white" /> check out using Google
+      </button>
+    </p>
+  </div>
+
+</row>
